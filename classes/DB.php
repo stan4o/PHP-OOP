@@ -71,22 +71,24 @@ class DB {
     }
 
     // TODO select certain columns from table
-    public function get($table, $where) {
-        return $this->action('SELECT *', $table, $where);
-    }
-
-    public function getAll($table, $columns = NULL) {
-        if (!is_null($columns) && is_array($columns)) {
-            $selected_columns = "`" . implode("`, `", $columns) . "`";
+    public function get($table, $where,  $columns = NULL) {
+        if ($where) {
+            return $this->action('SELECT *', $table, $where);
         } else {
-            $selected_columns = "*";
+            if (!is_null($columns) && is_array($columns)) {
+                $selected_columns = "`" . implode("`, `", $columns) . "`";
+            } else {
+                $selected_columns = "*";
+            }
+
+            $sql = "SELECT {$selected_columns} FROM {$table}";
+
+            if (!$this->query($sql)->errors()) {
+                return $this;
+            }
         }
 
-        $sql = "SELECT {$selected_columns} FROM {$table}";
-
-        if (!$this->query($sql)->errors()) {
-            return $this;
-        }
+        return FALSE;
     }
 
     public function delete($table, $where) {
