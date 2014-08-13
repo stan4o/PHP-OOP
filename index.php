@@ -8,14 +8,33 @@ if (Session::exists('home')) {
 
 $user = new User();
 $post = new Post();
-$data = $post->data();
+$posts = $post->find(3);
+// echo "<pre>" . print_r($posts, TRUE) . "</pre>";
 
-foreach ($data as $post) {
+if ($posts) {
+    $data = $posts->data();
+    if ($posts->count() > 1) {
+        foreach ($data as $post) {
+            ?>
+
+            <h3><?php echo $post->title; ?></h3>
+            <p>Date created: <em><time  datetime="<?php echo $post->created; ?>"><?php echo $post->created; ?></time></em></p>
+            <p><?php echo $post->body; ?></p>
+
+            <?php
+        }
+    } else {
+        $post = $posts->data();
+        ?>
+
+        <h3><?php echo $post->title; ?></h3>
+        <p>Date created: <em><time  datetime="<?php echo $post->created; ?>"><?php echo $post->created; ?></time></em></p>
+        <p><?php echo $post->body; ?></p>
+
+        <?php
+    }
+} else {
+    echo "There are no posts";
+}
 ?>
 
-<h3><?php echo $post->title; ?></h3>
-<p>Date created: <em><time  datetime="<?php echo $post->created; ?>"><?php echo $post->created; ?></time></em></p>
-<p><?php echo $post->body; ?></p>
-
-<?php
-}
