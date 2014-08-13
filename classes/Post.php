@@ -7,38 +7,33 @@ class Post {
                 $_count = 0,
                 $_errors = FALSE;
 
-    public function __construct($id = null) {
+    public function __construct() {
+
         $this->_db = DB::getInstance();
 
-        if (!$id) {
-            $this->findAll();
-        } else {
-            $this->find($id);
-        }
     }
 
-    private function find($id = NULL) {
+    public function find($id = NULL) {
         if ($id) {
             $post = $this->_db->get('posts', array('id', '=', $id));
 
             if ($post->count()) {
                 $this->_data = $post->first();
-                return TRUE;
+                $this->_count = $post->count();
+                return $this;
             } else {
                 $this->_errors = TRUE;
             }
-        }
+        } else {
+            $post = $this->_db->get('posts', FALSE);
 
-        return FALSE;
-    }
-
-    private function findAll() {
-
-        if (!$this->_db->getAll('posts')->errors()) {
-            $this->_data = $this->_db->results();
-            $this->_count = $this->_db->count();
-
-            return TRUE;
+            if ($post->count()) {
+                $this->_data = $post->results();
+                $this->_count = $post->count();
+                return $this;
+            } else {
+                $this->_errors = TRUE;
+            }
         }
 
         return FALSE;
@@ -50,6 +45,10 @@ class Post {
 
     public function count() {
         return $this->_count;
+    }
+
+    public function errors() {
+        return $this->_errors;
     }
 
 }
