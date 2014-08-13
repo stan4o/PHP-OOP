@@ -75,6 +75,20 @@ class DB {
         return $this->action('SELECT *', $table, $where);
     }
 
+    public function getAll($table, $columns = NULL) {
+        if (!is_null($columns) && is_array($columns)) {
+            $selected_columns = "`" . implode("`, `", $columns) . "`";
+        } else {
+            $selected_columns = "*";
+        }
+
+        $sql = "SELECT {$selected_columns} FROM {$table}";
+
+        if (!$this->query($sql)->errors()) {
+            return $this;
+        }
+    }
+
     public function delete($table, $where) {
         return $this->action('DELETE', $table, $where);
     }
