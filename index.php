@@ -7,25 +7,15 @@ if (Session::exists('home')) {
 }
 
 $user = new User();
+$post = new Post();
+$data = $post->data();
 
-if ($user->isLoggedIn()) {
-
+foreach ($data as $post) {
 ?>
 
-<p>Hello <a href="profile.php?user=<?php echo $user->data()->username; ?>"><?php echo $user->data()->username; ?></a>!</p>
-<?php if ($user->hasPermission('admin')) echo "<p>Your are an administrator</p>"; ?>
-<hr>
-<ul>
-    <li><a href="update.php">Update details</a></li>
-    <li><a href="changepassword.php">Change password</a></li>
-    <li><a href="profile.php?user=<?php echo $user->data()->username; ?>">Profile</a></li>
-    <li><a href="logout.php">Logout</a></li>
-</ul>
+<h3><?php echo $post->title; ?></h3>
+<p>Date created: <em><time  datetime="<?php echo $post->created; ?>"><?php echo $post->created; ?></time></em></p>
+<p><?php echo $post->body; ?></p>
 
 <?php
-
-} else {
-
-echo '<p>You can <a href="login.php">log in</a> or <a href="register.php">register</a>.</p>';
-
 }
