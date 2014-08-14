@@ -8,12 +8,12 @@ if (Session::exists('home')) {
 
 $user = new User();
 $post = new Post();
-$posts = $post->find(3);
-// echo "<pre>" . print_r($posts, TRUE) . "</pre>";
 
-if ($posts) {
-    $data = $posts->data();
-    if ($posts->count() > 1) {
+if ($post->find()) {
+    $data = $post->data();
+    echo $post->count();
+
+    if ($post->count() > 1) {
         foreach ($data as $post) {
             ?>
 
@@ -24,7 +24,7 @@ if ($posts) {
             <?php
         }
     } else {
-        $post = $posts->data();
+        $post = $post->data();
         ?>
 
         <h3><?php echo $post->title; ?></h3>
