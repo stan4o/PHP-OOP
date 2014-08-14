@@ -12,7 +12,6 @@ class DB {
     private function __construct() {
         try {
             $this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname=' . Config::get('mysql/db') , Config::get('mysql/username'), Config::get('mysql/password'));
-            mysql_set_charset('UTF-8');
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -70,8 +69,7 @@ class DB {
         return FALSE;
     }
 
-    // TODO select certain columns from table
-    public function get($table, $where,  $columns = NULL) {
+    public function get($table, $where = FALSE,  $columns = NULL) {
         if ($where) {
             return $this->action('SELECT *', $table, $where);
         } else {
