@@ -4,39 +4,38 @@ class Post {
 
     private $_db,
                 $_data,
-                $_count = 0,
-                $_errors = FALSE;
+                $_count = 0;
 
     public function __construct() {
-
         $this->_db = DB::getInstance();
-
     }
 
-    public function find($id = NULL) {
-        if ($id) {
-            $post = $this->_db->get('posts', array('id', '=', $id));
-
-            if ($post->count()) {
-                $this->_data = $post->first();
-                $this->_count = $post->count();
-                return $this;
-            } else {
-                $this->_errors = TRUE;
-            }
+    public function find($post = NULL) {
+        if ($post) {
+            $field = (is_numeric($post)) ? 'id' : 'title';
+            $data = $this->_db->get('posts', array($field, '=', $post));
         } else {
-            $post = $this->_db->get('posts', FALSE);
+            $data = $this->_db->get('posts');
+        }
 
-            if ($post->count()) {
-                $this->_data = $post->results();
-                $this->_count = $post->count();
-                return $this;
-            } else {
-                $this->_errors = TRUE;
-            }
+        if ($data->count()) {
+            $this->_data = ($data->count() == 1) ? $data->first() : $data->results();
+            $this->_count = $data->count();
+
+            return TRUE;
         }
 
         return FALSE;
+    }
+
+    public function update($fields = array(), $id = NULL) {
+        if (!$id) {
+            $id = Input::get('article');
+        }
+
+        if (!$this->_db->update('posts', $id, $fields)) {
+            throw new Exception("There was a problem editing the post!");
+        }
     }
 
     public function data() {
@@ -45,10 +44,6 @@ class Post {
 
     public function count() {
         return $this->_count;
-    }
-
-    public function errors() {
-        return $this->_errors;
     }
 
 }
