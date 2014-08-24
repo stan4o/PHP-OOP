@@ -38,11 +38,14 @@ class User {
         if ($user) {
             $field = (is_numeric($user)) ? 'id' : 'username';
             $data = $this->_db->get('users', array($field, '=', $user));
+        } else {
+            $data = $this->_db->get('users');
+        }
 
-            if ($data->count()) {
-                $this->_data = $data->first();
-                return TRUE;
-            }
+        if ($data->count()) {
+            $this->_data = ($data->count() == 1) ? $data->first() : $data->results();
+
+            return TRUE;
         }
 
         return FALSE;
@@ -56,6 +59,18 @@ class User {
 
         if (!$this->_db->update('users', $id, $fields)) {
             throw new Exception("There was a problem updating");
+        }
+
+    }
+
+    public function delete($id = NULL) {
+
+         if (!is_null($id)) {
+            $field = (is_numeric($id)) ? 'id' : 'username';
+
+            if (!$this->_db->delete('users', array($field, '=', $id))) {
+                throw new Exception("There was a problem deleting the user");
+            }
         }
 
     }
