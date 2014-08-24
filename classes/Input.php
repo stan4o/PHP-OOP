@@ -20,7 +20,7 @@ class Input {
 
     }
 
-    public static function get($item = null) {
+    public static function get($item = NULL) {
 
         if (isset($_POST[$item])) {
             return $_POST[$item];
