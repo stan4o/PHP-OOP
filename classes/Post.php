@@ -19,7 +19,7 @@ class Post {
         }
 
         if ($data->count()) {
-            $this->_data = ($data->count() == 1) ? $data->first() : $data->results();
+            $this->_data = ($post) ? $data->first() : $data->results();
             $this->_count = $data->count();
 
             return TRUE;

@@ -43,7 +43,7 @@ class User {
         }
 
         if ($data->count()) {
-            $this->_data = ($data->count() == 1) ? $data->first() : $data->results();
+            $this->_data = ($user) ? $data->first() : $data->results();
 
             return TRUE;
         }
