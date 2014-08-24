@@ -30,7 +30,7 @@ class Post {
 
     public function update($fields = array(), $id = NULL) {
         if (!$id) {
-            $id = Input::get('article');
+            $id = (int) Input::get('id');
         }
 
         if (!$this->_db->update('posts', $id, $fields)) {
