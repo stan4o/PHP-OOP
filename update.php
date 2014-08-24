@@ -96,7 +96,7 @@ include 'includes/content/update-details-form.php';
                     }
                 } else {
                     Session::flash('update', implode("<br>", $validation->errors()));
-                    Redirect::to("update.php?action=posts");
+                    Redirect::to("update.php?action=posts&id={$data->id}");
                 }
             }
         }
