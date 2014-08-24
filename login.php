@@ -24,35 +24,15 @@ if (Input::exists()) {
             $login = $user->login(Input::get('username'), Input::get('password'), $remember);
 
             if ($login) {
-                Redirect::to('index.php');
+                Session::flash('home', 'You have been successfuly logged in!');
             } else {
-                echo "<p>Sorry, login atempt failed</p>";
+                Session::flash('home', 'Sorry, login atempt failed!');
             }
+
         } else {
-            foreach ($validation->errors() as $error) {
-                echo $error . "</br>";
-            }
+            Session::flash('home', implode("<br>", $validation->errors()));
         }
+
+        Redirect::to('index.php');
     }
 }
-
-?>
-<form action="" method="post">
-    <div class="field">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" autocomplete="off">
-    </div>
-
-    <div class="field">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" autocomplete="off">
-    </div>
-
-    <div class="field">
-        <input type="checkbox" id="remember" name="remember">
-        <label for="remember">Remember me</label>
-    </div>
-
-    <input type="hidden" name="token" value="<?php echo Token::generate();?>">
-    <input type="submit" value="Log in">
-</form>
