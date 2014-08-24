@@ -6,6 +6,10 @@ $user = new User();
 
 if (!$user->isLoggedIn()) Redirect::to('index.php');
 
+if (Session::exists('password')) {
+    echo "<p>" . Session::flash('password') . "</p>";
+}
+
 if (Input::exists()) {
     if (Token::check(Input::get('token'))) {
 
@@ -45,32 +49,11 @@ if (Input::exists()) {
             }
 
         } else {
-            foreach ($validation->errors() as $error) {
-                echo $error . "</br>";
-            }
+            Session::flash('password', implode("<br>", $validation->errors()));
+            Redirect::to('changepassword.php');
         }
 
     }
 }
 
-?>
-
-<form action="" method="post">
-    <div class="field">
-        <label for="password_current">Current password</label>
-        <input type="password" id="password_current" name="password_current">
-    </div>
-
-    <div class="field">
-        <label for="password_new">New password</label>
-        <input type="password" id="password_new" name="password_new">
-    </div>
-
-    <div class="field">
-        <label for="password_new_again">New password again</label>
-        <input type="password" id="password_new_again" name="password_new_again">
-    </div>
-
-    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-    <input type="submit" value="Change">
-</form>
+include 'includes/content/changepassword-form.php';
