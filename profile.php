@@ -25,4 +25,3 @@ if (!$username = Input::get('user')) {
 
 <hr>
 <a href="index.php">Back</a>
-<a href="logout.php">Logout</a>
