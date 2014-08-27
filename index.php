@@ -15,5 +15,3 @@ if ($user->isLoggedIn()) {
 } else {
     include 'includes/content/login-form.php';
 }
-
-
