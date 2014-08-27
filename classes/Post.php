@@ -28,6 +28,12 @@ class Post {
         return FALSE;
     }
 
+    public function create($fields = array()) {
+        if (!$this->_db->insert('posts', $fields)) {
+            throw new Exception("There was an error creating new post");
+        }
+    }
+
     public function update($fields = array(), $id = NULL) {
         if (!$id) {
             $id = (int) Input::get('id');
@@ -36,6 +42,10 @@ class Post {
         if (!$this->_db->update('posts', $id, $fields)) {
             throw new Exception("There was a problem editing the post!");
         }
+    }
+
+    public function delete() {
+
     }
 
     public function data() {
