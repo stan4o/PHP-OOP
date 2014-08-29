@@ -33,7 +33,7 @@ if ($action === 'users' && !is_null($id)) {
 
 } else if ($action === 'posts') {
 
-    echo 'posts';
+    // Delete posts
 
 } else {
 
