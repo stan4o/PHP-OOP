@@ -2,7 +2,7 @@
 
 class Redirect {
 
-    public static function to($location = NULL) {
+    public static function to($location = NULL, $params = array()) {
         if ($location) {
 
             if (is_numeric($location)) {
@@ -12,6 +12,17 @@ class Redirect {
                         include 'includes/errors/404.php';
                         exit();
                         break;
+                }
+            }
+
+            if ($params) {
+                $location .= "?";
+                $pos = 1;
+                foreach ($params as $k => $v) {
+                    $location .= $k . "=" . $v;
+                    if ($pos < count($params)) {
+                        $location .= "&";
+                    }
                 }
             }
 
