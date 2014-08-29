@@ -110,7 +110,7 @@ if (!$user->isLoggedIn() || !$user->hasPermission('admin')) Redirect::to('index.
                 }
             } else {
                 Session::flash('create', implode("<br>", $validation->errors()));
-                Redirect::to('create.php?action=posts');
+                Redirect::to('create.php', array('action' => 'posts'));
             }
 
         }
