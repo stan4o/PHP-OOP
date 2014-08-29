@@ -38,7 +38,7 @@ if ($action === 'details') {
                 }
             } else {
                 Session::flash('update', implode("<br>", $validation->errors()));
-                Redirect::to('update.php');
+                Redirect::to('update.php', array('action' => 'details'));
             }
         }
     }
@@ -49,8 +49,8 @@ include 'includes/content/update-details-form.php';
     $post = new Post();
 
     if (!$post->find()) {
-        Session::flash('create', 'No blog posts created. Create new one!');
-        Redirect::to('create.php');
+        Session::flash('create', 'No blog posts created. Create one!');
+        Redirect::to('create.php', array('action' => 'posts'));
     }
 
     $data = $post->data();
@@ -89,14 +89,14 @@ include 'includes/content/update-details-form.php';
                         );
 
                         Session::flash('update', 'The post has been updated!');
-                        Redirect::to('update.php?action=posts');
+                        Redirect::to('update.php', array('action' => 'posts'));
 
                     } catch (Exception $e) {
                         die($e->getMessage());
                     }
                 } else {
                     Session::flash('update', implode("<br>", $validation->errors()));
-                    Redirect::to("update.php?action=posts&id={$data->id}");
+                    Redirect::to("update.php", array('action' => 'posts', 'id' => $data->id));
                 }
             }
         }
