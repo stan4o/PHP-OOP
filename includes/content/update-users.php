@@ -10,10 +10,10 @@
             foreach ($data as $user) : ?>
                 <tr>
                     <td>
-                        <a href="update.php?action=users&amp;id=<?php echo escape(intval($user->id)); ?>"><?php echo escape($user->name); ?></a>
+                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($user->id)); ?>"><?php echo escape($user->name); ?></a>
                     </td>
                     <td>
-                        <a href="update.php?action=users&amp;id=<?php echo escape(intval($user->id)); ?>"><?php echo escape($user->username); ?></a>
+                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($user->id)); ?>"><?php echo escape($user->username); ?></a>
                     </td>
                     <td>
                         <em><time  datetime="<?php echo escape($user->created); ?>"><?php echo escape($user->joined); ?></time></em>
@@ -26,10 +26,10 @@
         <?php endforeach; } else { ?>
                 <tr>
                     <td>
-                        <a href="update.php?action=users&amp;id=<?php echo escape(intval($data->id)); ?>"><?php echo escape($data->name); ?></a>
+                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($data->id)); ?>"><?php echo escape($data->name); ?></a>
                     </td>
                     <td>
-                        <a href="update.php?action=users&amp;id=<?php echo escape(intval($data->id)); ?>"><?php echo escape($data->username); ?></a>
+                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($data->id)); ?>"><?php echo escape($data->username); ?></a>
                     </td>
                     <td>
                         <em><time  datetime="<?php echo escape($data->created); ?>"><?php echo escape($data->joined); ?></time></em>
