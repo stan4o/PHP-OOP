@@ -18,9 +18,11 @@ class Redirect {
             if ($params) {
                 $location .= "?";
                 $pos = 1;
+                $keys = count($params);
+
                 foreach ($params as $k => $v) {
                     $location .= $k . "=" . $v;
-                    if ($pos < count($params)) {
+                    if ($pos < $keys) {
                         $location .= "&";
                     }
                 }
