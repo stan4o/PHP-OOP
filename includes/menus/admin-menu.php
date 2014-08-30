@@ -1,2 +1,2 @@
-<li><a href="update.php?action=posts">Update</a></li>
-<li><a href="create.php">Create</a></li>
+<li><a href="update.php?action=posts">Update Posts</a></li>
+<li><a href="update.php?action=users">Update Users</a></li>
