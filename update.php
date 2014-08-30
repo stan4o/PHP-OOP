@@ -45,6 +45,16 @@ if ($action === 'details') {
 
 include 'includes/content/update-details-form.php';
 
+} else if ($action === 'users' && $user->hasPermission('admin')) {
+     if (!$user->find()) {
+        Session::flash('create', 'No users found. Create new one!');
+        Redirect::to('create.php', array('action' => 'users'));
+    }
+
+    $data = $user->data();
+
+    include 'includes/content/update-users.php';
+
 } else if ($action === 'posts' && $user->hasPermission('admin')) {
     $post = new Post();
 
@@ -103,6 +113,7 @@ include 'includes/content/update-details-form.php';
 
         include 'includes/content/update-posts-form.php';
     }
+
 } else {
     Redirect::to(404);
 }
