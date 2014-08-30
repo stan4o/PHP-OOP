@@ -97,8 +97,8 @@ if (!$user->isLoggedIn() || !$user->hasPermission('admin')) Redirect::to('index.
 
                     $post = new Post();
                     $post->create(array(
-                        'title' => escape(Input::get('title')),
-                        'body' => escape(Input::get('body')),
+                        'title' => Input::get('title'),
+                        'body' => Input::get('body'),
                         'created' => date("Y-m-d H:i:s")
                     ));
 
