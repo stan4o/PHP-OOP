@@ -36,4 +36,7 @@
     </tbody>
 </table>
 
-<a href="index.php">Back</a>
+<div class="links">
+    <a href="create.php?action=posts">Create new post</a> or go
+    <a href="index.php">Back</a>
+</div>
