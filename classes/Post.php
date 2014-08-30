@@ -35,17 +35,15 @@ class Post {
     }
 
     public function update($fields = array(), $id = NULL) {
-        if (!$id) {
-            $id = (int) Input::get('id');
-        }
-
         if (!$this->_db->update('posts', $id, $fields)) {
-            throw new Exception("There was a problem editing the post!");
+            throw new Exception("There was a problem updating the post!");
         }
     }
 
-    public function delete() {
-
+    public function delete($id = NULL) {
+        if (!$this->_db->delete('posts', array('id', '=', $id))) {
+            throw new Exception("There was a problem deleting the post");
+        }
     }
 
     public function data() {
