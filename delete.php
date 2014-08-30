@@ -19,10 +19,17 @@ if ($action === 'users' && !is_null($id)) {
 
     if ($user->find($id) && !($id === $loggedUser)) {
 
-        $user->delete($id);
+        try {
 
-        Session::flash('home', 'You have deleted the user successfully');
-        Redirect::to('index.php');
+             $user->delete($id);
+
+             Session::flash('home', 'You have deleted the user successfully');
+             Redirect::to('index.php');
+
+        } catch (Exception $e) {
+            Session::flash('home', $e->getMessage());
+            Redirect::to('index.php');
+        }
 
     } else {
 
@@ -31,9 +38,22 @@ if ($action === 'users' && !is_null($id)) {
 
     }
 
-} else if ($action === 'posts') {
+} else if ($action === 'posts' && !is_null($id)) {
+    $post = new Post();
 
-    // Delete posts
+    if ($post->find($id)) {
+        try {
+
+            $post->delete($id);
+
+            Session::flash('home', 'You have deleted the post successfully');
+            Redirect::to('index.php');
+
+        } catch (Exception $e) {
+            Session::flash('home', $e->getMessage());
+            Redirect::to('index.php');
+        }
+    }
 
 } else {
 
