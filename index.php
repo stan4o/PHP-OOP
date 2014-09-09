@@ -8,10 +8,8 @@ if (Session::exists('home')) {
 
 $user = new User();
 
-include 'includes/menus/main-menu.php';
-
 if ($user->isLoggedIn()) {
-    include 'includes/menus/user-menu.php';
+    include 'includes/user/menu.php';
 } else {
     include 'includes/content/login-form.php';
 }
