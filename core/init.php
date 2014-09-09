@@ -9,6 +9,7 @@ mb_internal_encoding('UTF-8');
 // Define BASE URI and DIRECTORY_SEPARATOR
 if (!defined("DS")) define("DS", DIRECTORY_SEPARATOR);
 if (!defined("BASE")) define("BASE", dirname(dirname(__FILE__)) . DS);
+if (!defined("TMP")) define("TMP", BASE . "includes");
 
 // Configurations array
 $GLOBALS['config'] = array(
@@ -25,9 +26,6 @@ $GLOBALS['config'] = array(
     'session' => array(
         'session_name' => 'user',
         'token_name' => 'token'
-    ),
-    'paths' => array(
-        'template' => BASE . "includes" . DS
     )
 );
 
@@ -38,19 +36,6 @@ spl_autoload_register(function ($class) {
 
 // Require sanitizing functions
 require_once 'functions/sanitize.php';
-
-// Build the page
-$tpl = new View();
-
-$tpl->header = function () {
-    $header = new View('header');
-    return $header->render();
-};
-
-$tpl->footer = function () {
-    $footer = new View('footer');
-    return $footer->render();
-};
 
 // Auto login for 'remember me' functionality
 if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('session/session_name'))) {
