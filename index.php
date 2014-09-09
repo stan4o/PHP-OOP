@@ -9,7 +9,7 @@ if (Session::exists('home')) {
 $user = new User();
 
 if ($user->isLoggedIn()) {
-    include 'includes/user/menu.php';
+    include TMP . 'user/menu.php';
 } else {
-    include 'includes/content/login-form.php';
+    include TMP . 'content/login-form.php';
 }
