@@ -6,6 +6,6 @@ if (Session::exists('register')) {
     echo "<p>" . Session::flash('register') . "</p>";
 }
 
-include 'includes/content/create-users.php';
+include TMP . 'content/create-users.tpl.php';
 ?>
 

@@ -43,7 +43,7 @@ if ($action === 'details') {
         }
     }
 
-include 'includes/content/update-details-form.php';
+include TMP . 'content/update-details-form.tpl.php';
 
 } else if ($action === 'users' && $user->hasPermission('admin')) {
      if (!$user->find()) {
@@ -53,7 +53,7 @@ include 'includes/content/update-details-form.php';
 
     $data = $user->data();
 
-    include 'includes/content/update-users.php';
+    include TMP . 'content/update-users.tpl.php';
 
 } else if ($action === 'posts' && $user->hasPermission('admin')) {
     $post = new Post();
@@ -66,7 +66,7 @@ include 'includes/content/update-details-form.php';
     $data = $post->data();
 
     if (!$postId = Input::get('id')) {
-        include 'includes/content/update-posts.php';
+        include TMP . 'content/update-posts.tpl.php';
     } else {
         if (!$post->find($postId)) Redirect::to('index.php');
         $data = $post->data();
@@ -111,7 +111,7 @@ include 'includes/content/update-details-form.php';
             }
         }
 
-        include 'includes/content/update-posts-form.php';
+        include TMP . 'content/update-posts-form.tpl.php';
     }
 
 } else {

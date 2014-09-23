@@ -56,4 +56,4 @@ if (Input::exists()) {
     }
 }
 
-include 'includes/content/changepassword-form.php';
+include TMP . 'content/changepassword-form.tpl.php';

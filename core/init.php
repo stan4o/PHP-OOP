@@ -9,7 +9,7 @@ mb_internal_encoding('UTF-8');
 // Define BASE URI and DIRECTORY_SEPARATOR
 if (!defined("DS")) define("DS", DIRECTORY_SEPARATOR);
 if (!defined("BASE")) define("BASE", dirname(dirname(__FILE__)) . DS);
-if (!defined("TMP")) define("TMP", BASE . "includes");
+if (!defined("TMP")) define("TMP", BASE . "includes" . DS);
 
 // Configurations array
 $GLOBALS['config'] = array(

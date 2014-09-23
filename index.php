@@ -8,8 +8,11 @@ if (Session::exists('home')) {
 
 $user = new User();
 
+include TMP . 'menus/main-menu.tpl.php';
+
+
 if ($user->isLoggedIn()) {
-    include TMP . 'user/menu.php';
+    include TMP . 'menus/user-menu.tpl.php';
 } else {
-    include TMP . 'content/login-form.php';
+    include TMP . 'content/login-form.tpl.php';
 }

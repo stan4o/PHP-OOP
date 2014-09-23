@@ -69,7 +69,7 @@ if ($action === 'users') {
         }
     }
 
-include 'includes/content/create-users.php';
+include TMP . 'content/create-users.tpl.php';
 
 } else if ($action === 'posts') {
 
@@ -116,7 +116,7 @@ if (!$user->isLoggedIn() || !$user->hasPermission('admin')) Redirect::to('index.
         }
     }
 
-    include 'includes/content/create-posts.php';
+    include TMP . 'content/create-posts.tpl.php';
 
 } else {
 
