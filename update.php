@@ -2,8 +2,6 @@
 
 require_once 'core/init.php';
 
-$user = new User();
-
 if (!$user->isLoggedIn()) Redirect::to('index.php');
 
 if (Session::exists('update')) {
@@ -43,7 +41,7 @@ if ($action === 'details') {
         }
     }
 
-include TMP . 'content/update-details-form.tpl.php';
+$view->addView('content/update-details-form');
 
 } else if ($action === 'users' && $user->hasPermission('admin')) {
      if (!$user->find()) {
@@ -51,9 +49,9 @@ include TMP . 'content/update-details-form.tpl.php';
         Redirect::to('create.php', array('action' => 'users'));
     }
 
-    $data = $user->data();
+    $view->data = $user->data();
 
-    include TMP . 'content/update-users.tpl.php';
+    $view->addView('content/update-users');
 
 } else if ($action === 'posts' && $user->hasPermission('admin')) {
     $post = new Post();
@@ -63,13 +61,13 @@ include TMP . 'content/update-details-form.tpl.php';
         Redirect::to('create.php', array('action' => 'posts'));
     }
 
-    $data = $post->data();
+    $view->data = $post->data();
 
     if (!$postId = Input::get('id')) {
-        include TMP . 'content/update-posts.tpl.php';
+        $view->addView('content/update-posts');
     } else {
         if (!$post->find($postId)) Redirect::to('index.php');
-        $data = $post->data();
+        $view->data = $post->data();
 
         if (Input::exists()) {
             if (Token::check(Input::get('token'))) {
@@ -111,9 +109,12 @@ include TMP . 'content/update-details-form.tpl.php';
             }
         }
 
-        include TMP . 'content/update-posts-form.tpl.php';
+        $view->addView('content/update-posts-form');
     }
 
 } else {
     Redirect::to(404);
 }
+
+$view->title = "Update {$action}";
+echo $view->render();

@@ -2,8 +2,6 @@
 
 require 'core/init.php';
 
-$user = new User();
-
 if (Session::exists('create')) {
 
     echo "<p>" . Session::flash('create') . "</p>";
@@ -42,7 +40,6 @@ if ($action === 'users') {
 
             if ($validation->passed()) {
 
-                $user = new User();
                 $salt = Hash::salt(32);
 
                 try {
@@ -69,7 +66,7 @@ if ($action === 'users') {
         }
     }
 
-include TMP . 'content/create-users.tpl.php';
+$view->addView('content/create-users');
 
 } else if ($action === 'posts') {
 
@@ -116,10 +113,13 @@ if (!$user->isLoggedIn() || !$user->hasPermission('admin')) Redirect::to('index.
         }
     }
 
-    include TMP . 'content/create-posts.tpl.php';
+    $view->addView('content/create-posts');
 
 } else {
 
     Redirect::to(404);
 
 }
+
+$view->title = "Create {$action}";
+echo $view->render();

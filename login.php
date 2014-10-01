@@ -20,7 +20,6 @@ if (Input::exists()) {
         if ($validation->passed()) {
 
             $remember = (Input::get('remember') === "on") ? TRUE : FALSE;
-            $user = new User();
             $login = $user->login(Input::get('username'), Input::get('password'), $remember);
 
             if ($login) {

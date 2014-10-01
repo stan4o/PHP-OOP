@@ -6,8 +6,8 @@
         <th>Action</th>
     </thead>
     <tbody>
-        <?php if (is_array($data)) {
-            foreach ($data as $user) : ?>
+        <?php if (is_array($this->data)) {
+            foreach ($this->data as $user) : ?>
                 <tr>
                     <td>
                         <a href="update.php?action=details&amp;id=<?php echo escape(intval($user->id)); ?>"><?php echo escape($user->name); ?></a>
@@ -26,17 +26,17 @@
         <?php endforeach; } else { ?>
                 <tr>
                     <td>
-                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($data->id)); ?>"><?php echo escape($data->name); ?></a>
+                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($this->data->id)); ?>"><?php echo escape($this->data->name); ?></a>
                     </td>
                     <td>
-                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($data->id)); ?>"><?php echo escape($data->username); ?></a>
+                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($this->data->id)); ?>"><?php echo escape($this->data->username); ?></a>
                     </td>
                     <td>
-                        <em><time  datetime="<?php echo escape($data->created); ?>"><?php echo escape($data->joined); ?></time></em>
+                        <em><time  datetime="<?php echo escape($this->data->created); ?>"><?php echo escape($this->data->joined); ?></time></em>
                     </td>
                     <td>
-                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($data->id)); ?>">Update</a>
-                        <a href="delete.php?action=users&amp;id=<?php echo escape(intval($data->id)); ?>">Delete</a>
+                        <a href="update.php?action=details&amp;id=<?php echo escape(intval($this->data->id)); ?>">Update</a>
+                        <a href="delete.php?action=users&amp;id=<?php echo escape(intval($this->data->id)); ?>">Delete</a>
                     </td>
                 </tr>
         <?php } ?>

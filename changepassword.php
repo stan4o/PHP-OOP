@@ -2,8 +2,6 @@
 
 require_once 'core/init.php';
 
-$user = new User();
-
 if (!$user->isLoggedIn()) Redirect::to('index.php');
 
 if (Session::exists('password')) {
@@ -56,4 +54,6 @@ if (Input::exists()) {
     }
 }
 
-include TMP . 'content/changepassword-form.tpl.php';
+$view->addView('content/changepassword-form');
+$view->title = "Change your password.";
+echo $view->render();

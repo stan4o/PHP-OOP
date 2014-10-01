@@ -5,8 +5,8 @@
         <th>Action</th>
     </thead>
     <tbody>
-        <?php if (is_array($data)) {
-            foreach ($data as $post) : ?>
+        <?php if (is_array($this->data)) {
+            foreach ($this->data as $post) : ?>
                 <tr>
                     <td>
                         <a href="update.php?action=posts&amp;id=<?php echo escape(intval($post->id)); ?>"><?php echo escape($post->title); ?></a>
@@ -22,14 +22,14 @@
         <?php endforeach; } else { ?>
                 <tr>
                     <td>
-                        <a href="update.php?action=posts&amp;id=<?php echo escape(intval($data->id)); ?>"><?php echo escape($data->title); ?></a>
+                        <a href="update.php?action=posts&amp;id=<?php echo escape(intval($this->data->id)); ?>"><?php echo escape($this->data->title); ?></a>
                     </td>
                     <td>
-                        <em><time  datetime="<?php echo escape($data->created); ?>"><?php echo escape($data->created); ?></time></em>
+                        <em><time  datetime="<?php echo escape($this->data->created); ?>"><?php echo escape($this->data->created); ?></time></em>
                     </td>
                     <td>
-                        <a href="update.php?action=posts&amp;id=<?php echo escape(intval($data->id)); ?>">Update</a>
-                        <a href="delete.php?action=posts&amp;id=<?php echo escape(intval($data->id)); ?>">Delete</a>
+                        <a href="update.php?action=posts&amp;id=<?php echo escape(intval($this->data->id)); ?>">Update</a>
+                        <a href="delete.php?action=posts&amp;id=<?php echo escape(intval($this->data->id)); ?>">Delete</a>
                     </td>
                 </tr>
         <?php } ?>

@@ -6,6 +6,6 @@ if (Session::exists('register')) {
     echo "<p>" . Session::flash('register') . "</p>";
 }
 
-include TMP . 'content/create-users.tpl.php';
-?>
-
+$view->addView('content/create-users');
+$view->title = "Register";
+echo $view->render();

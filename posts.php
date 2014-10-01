@@ -32,4 +32,7 @@ if ($post->find()) {
     Session::flash('home', 'There are no blog posts!');
     Redirect::to('index.php');
 }
+
+$view->title = "Posts";
+echo $view->render();
 ?>

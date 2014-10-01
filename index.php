@@ -6,13 +6,13 @@ if (Session::exists('home')) {
     echo "<p>" . Session::flash('home') . "</p>";
 }
 
-$user = new User();
-
-include TMP . 'menus/main-menu.tpl.php';
-
+$view->addView('menus/main-menu');
 
 if ($user->isLoggedIn()) {
-    include TMP . 'menus/user-menu.tpl.php';
+    $view->addView('menus/user-menu');
 } else {
-    include TMP . 'content/login-form.tpl.php';
+    $view->addView('content/login-form');
 }
+
+$view->title = "Home";
+echo $view->render();

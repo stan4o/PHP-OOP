@@ -2,8 +2,6 @@
 
 require 'core/init.php';
 
-$user = new User();
-
 if (!$user->isLoggedIn() || !$user->hasPermission('admin')) Redirect::to('index.php');
 
 if (Session::exists('delete')) {

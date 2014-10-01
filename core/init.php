@@ -37,6 +37,20 @@ spl_autoload_register(function ($class) {
 // Require sanitizing functions
 require_once 'functions/sanitize.php';
 
+// User instance
+$user = new User();
+
+// View
+$view = new View();
+
+// Asign the user object
+$view->user = $user;
+
+// Load external resources
+$view->addHeadInfo('stylesheet', '../includes/css/main.css');
+$view->addHeadInfo('script', '//code.jquery.com/jquery-1.11.0.min.js');
+$view->addHeadInfo('script', '../includes/js/main.js');
+
 // Auto login for 'remember me' functionality
 if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('session/session_name'))) {
     $hash = Cookie::get(Config::get('remember/cookie_name'));

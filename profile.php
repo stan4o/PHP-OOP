@@ -16,7 +16,8 @@ if (!$username = Input::get('user')) {
         $data = $user->data();
     }
 }
-
+$view->title = "Profile";
+echo $view->render();
 ?>
 
 <h3><?php echo escape($data->username); ?></h3>
