@@ -61,3 +61,6 @@ if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Conf
         $user->login();
     }
 }
+
+// Include the main menu
+include TMP . 'menus/main-menu.tpl.php';
